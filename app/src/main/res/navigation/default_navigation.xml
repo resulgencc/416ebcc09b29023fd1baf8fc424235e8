@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/default_navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.teknasyon.satellitetracker.ui.main.MainFragment"
+        android:label="MainFragment" />
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.teknasyon.satellitetracker.ui.details.DetailsFragment"
+        android:label="DetailsFragment" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.teknasyon.satellitetracker.ui.search.SearchFragment"
+        android:label="SearchFragment" />
+
+</navigation>
