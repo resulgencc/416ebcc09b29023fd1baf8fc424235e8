@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="satellite"
+            type="com.teknasyon.satellitetracker.model.Satellite" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="@{satellite.isActive}"
+        android:focusable="@{satellite.isActive}"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:enabled="@{satellite.isActive}"
+            app:layout_constraintBottom_toBottomOf="@+id/satelliteState"
+            app:layout_constraintEnd_toStartOf="@+id/satelliteName"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/satelliteName"
+            app:srcCompat="@drawable/satellite_state_selector" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/satelliteName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:enabled="@{satellite.isActive}"
+            android:text="@{satellite.name}"
+            android:textColor="@color/satellite_state_text_color"
+            app:fontFamily="@font/roboto_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/state"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/satelliteState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{satellite.isActive}"
+            android:text="@{satellite.isActive ? @string/active : @string/passive}"
+            android:textColor="@color/satellite_state_text_color"
+            app:layout_constraintStart_toStartOf="@+id/satelliteName"
+            app:layout_constraintTop_toBottomOf="@+id/satelliteName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
