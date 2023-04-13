@@ -1,23 +1,23 @@
 package com.teknasyon.satellitetracker.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.teknasyon.satellitetracker.R
+import com.teknasyon.satellitetracker.data.model.Satellite
+import com.teknasyon.satellitetracker.data.source.DataState
 import com.teknasyon.satellitetracker.databinding.FragmentMainBinding
-import com.teknasyon.satellitetracker.model.Satellite
-import com.teknasyon.satellitetracker.source.DataState
 import com.teknasyon.satellitetracker.ui.base_classes.BaseFragment
 import com.teknasyon.satellitetracker.util.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment(R.layout.fragment_main){
+class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private val binding by viewBinding(FragmentMainBinding::bind)
 
@@ -30,9 +30,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main){
         viewModel.readSatellites()
     }
 
-    private fun subscribeToObservers(){
-        viewModel.satellite.observe(viewLifecycleOwner){
-            when(it){
+    private fun subscribeToObservers() {
+        viewModel.satellite.observe(viewLifecycleOwner) {
+            when (it) {
                 is DataState.Loading -> {
                     binding.loadingProgressBar.isGone = false
                 }
@@ -50,7 +50,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main){
         }
     }
 
-    private fun setUI(){
+    private fun setUI() {
         val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 
         AppCompatResources.getDrawable(requireContext(), R.drawable.adapter_item_decoration)?.let {
@@ -63,7 +63,8 @@ class MainFragment : BaseFragment(R.layout.fragment_main){
         }
     }
 
-    private fun navigateToDetails(satellite: Satellite){
-        Log.d("clicked", "clicked: $satellite")
+    private fun navigateToDetails(satellite: Satellite) {
+        val action = MainFragmentDirections.navigateToDetailsFragment(satellite = satellite)
+        findNavController().navigate(action)
     }
 }

@@ -1,4 +1,4 @@
-package com.teknasyon.satellitetracker.model
+package com.teknasyon.satellitetracker.data.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,7 +11,7 @@ data class Position(
     @SerializedName("posX") val x: Float = 0F,
     @SerializedName("posY") val y: Float = 0F
 ) {
-    override fun toString(): String = "$x,$y"
+    override fun toString(): String = "($x,$y)"
 }
 
 data class SatellitePositionsResponse(

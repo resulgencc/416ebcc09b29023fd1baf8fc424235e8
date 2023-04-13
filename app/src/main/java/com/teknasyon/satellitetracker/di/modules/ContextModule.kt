@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ContextModule {
-
     @Provides
     @Singleton
     fun provideAssetManager(@ApplicationContext context: Context): AssetManager = context.assets

@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="satellite"
+            type="com.teknasyon.satellitetracker.data.model.Satellite" />
+
+        <variable
+            name="satelliteDetails"
+            type="com.teknasyon.satellitetracker.data.model.SatelliteDetails" />
+
+        <variable
+            name="position"
+            type="com.teknasyon.satellitetracker.data.model.Position" />
+
+        <variable
+            name="resources"
+            type="com.teknasyon.satellitetracker.util.StringResources" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{satellite.name}"
+            android:textSize="24sp"
+            app:fontFamily="@font/roboto_bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{satelliteDetails.formattedFirstFlightDate}"
+            android:textSize="12sp"
+            app:fontFamily="@font/roboto_light" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            bind:resourceId="@{resources.heightMass}"
+            bind:value="@{satelliteDetails.formattedHeightMass}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            bind:resourceId="@{resources.cost}"
+            bind:value="@{satelliteDetails.formattedCostPerLaunch}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            bind:resourceId="@{resources.lastPosition}"
+            bind:value="@{position.toString()}" />
+
+    </LinearLayout>
+
+</layout>

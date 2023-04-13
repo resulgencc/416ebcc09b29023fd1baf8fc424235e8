@@ -1,4 +1,4 @@
-package com.teknasyon.satellitetracker.source.local
+package com.teknasyon.satellitetracker.data.source.local.assets
 
 import android.content.res.AssetManager
 import com.google.gson.Gson

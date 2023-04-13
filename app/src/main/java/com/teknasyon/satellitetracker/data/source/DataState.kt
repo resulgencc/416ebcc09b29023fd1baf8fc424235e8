@@ -1,4 +1,4 @@
-package com.teknasyon.satellitetracker.source
+package com.teknasyon.satellitetracker.data.source
 
 sealed class DataState <out R> {
     data class Success<out T>(val data: T): DataState<T>()

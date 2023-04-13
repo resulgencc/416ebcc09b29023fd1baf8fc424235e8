@@ -3,8 +3,8 @@ package com.teknasyon.satellitetracker.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teknasyon.satellitetracker.data.model.Satellite
 import com.teknasyon.satellitetracker.databinding.AdapterItemSatellitesBinding
-import com.teknasyon.satellitetracker.model.Satellite
 
 class SatellitesAdapter(
     private val satellites: List<Satellite>,

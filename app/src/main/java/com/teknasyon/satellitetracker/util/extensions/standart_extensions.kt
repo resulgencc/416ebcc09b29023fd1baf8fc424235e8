@@ -1,5 +1,7 @@
 package com.teknasyon.satellitetracker.util.extensions
 
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,3 +17,13 @@ fun String.convertTo(
         ex.printStackTrace()
         this
     }
+
+fun Int.showWithSeparatorDots(): String {
+    val locale = Locale.getDefault()
+    val symbols = DecimalFormatSymbols(locale).apply {
+        groupingSeparator = '.'
+    }
+
+    val formatter = DecimalFormat("#,###", symbols)
+    return formatter.format(this)
+}

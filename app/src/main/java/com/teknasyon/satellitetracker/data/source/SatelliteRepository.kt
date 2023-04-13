@@ -1,15 +1,14 @@
-package com.teknasyon.satellitetracker.source
+package com.teknasyon.satellitetracker.data.source
 
-import com.teknasyon.satellitetracker.model.Satellite
-import com.teknasyon.satellitetracker.source.local.SatellitesAssetReader
+import com.teknasyon.satellitetracker.data.model.Satellite
+import com.teknasyon.satellitetracker.data.source.local.assets.SatellitesAssetReader
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class SatelliteDataRepository @Inject constructor(
+class SatelliteRepository @Inject constructor(
     private val satellitesAssetReader: SatellitesAssetReader
 ) {
-
     suspend fun getSatellites(): Flow<DataState<List<Satellite>>> = flow {
         emit(DataState.Loading)
         try {

@@ -7,12 +7,24 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.teknasyon.satellitetracker.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/navigate_to_details_fragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.teknasyon.satellitetracker.ui.details.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="satellite"
+            app:argType="com.teknasyon.satellitetracker.data.model.Satellite" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"

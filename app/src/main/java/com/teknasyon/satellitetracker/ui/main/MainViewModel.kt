@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teknasyon.satellitetracker.model.Satellite
-import com.teknasyon.satellitetracker.source.DataState
-import com.teknasyon.satellitetracker.source.SatelliteDataRepository
+import com.teknasyon.satellitetracker.data.model.Satellite
+import com.teknasyon.satellitetracker.data.source.DataState
+import com.teknasyon.satellitetracker.data.source.SatelliteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val satelliteDataRepository: SatelliteDataRepository
+    private val satelliteRepository: SatelliteRepository
 ): ViewModel(){
 
     private val _satellites : MutableLiveData<DataState<List<Satellite>>> = MutableLiveData()
@@ -23,7 +23,7 @@ class MainViewModel @Inject constructor(
 
     fun readSatellites(){
         viewModelScope.launch {
-            satelliteDataRepository.getSatellites()
+            satelliteRepository.getSatellites()
                 .onEach {
                     _satellites.value = it
                 }.launchIn(viewModelScope)
