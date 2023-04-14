@@ -13,3 +13,5 @@ object StringResources {
     const val heightMass = R.string.height_mass
     const val lastPosition = R.string.last_position
 }
+
+const val LAST_POSITION_DELAY = 3000L
