@@ -1,9 +1,6 @@
 package com.teknasyon.satellitetracker.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.teknasyon.satellitetracker.data.model.Satellite
 import com.teknasyon.satellitetracker.data.source.DataState
 import com.teknasyon.satellitetracker.data.source.SatelliteRepository
@@ -13,15 +10,20 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val SEARCH_QUERY = "search_query"
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val satelliteRepository: SatelliteRepository
-): ViewModel(){
+    private val satelliteRepository: SatelliteRepository,
+    private val stateHandle: SavedStateHandle
+) : ViewModel() {
 
-    private val _satellites : MutableLiveData<DataState<List<Satellite>>> = MutableLiveData()
-    val satellite : LiveData<DataState<List<Satellite>>> = _satellites
+    private val _satellites: MutableLiveData<DataState<List<Satellite>>> = MutableLiveData()
+    val satellite: LiveData<DataState<List<Satellite>>> = _satellites
 
-    fun readSatellites(){
+    val searchQuery = stateHandle.getLiveData<String?>(SEARCH_QUERY)
+
+    fun readSatellites() {
         viewModelScope.launch {
             satelliteRepository.getSatellites()
                 .onEach {
@@ -30,4 +32,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun writeToSearchQuery(filterText: String?) {
+        stateHandle[SEARCH_QUERY] = filterText
+    }
 }

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.teknasyon.satellitetracker.ui.main.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment">
         <action
             android:id="@+id/navigate_to_details_fragment"
             app:destination="@id/detailsFragment"
@@ -20,15 +20,10 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.teknasyon.satellitetracker.ui.details.DetailsFragment"
-        android:label="DetailsFragment" >
+        android:label="DetailsFragment">
         <argument
             android:name="satellite"
             app:argType="com.teknasyon.satellitetracker.data.model.Satellite" />
     </fragment>
-
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.teknasyon.satellitetracker.ui.search.SearchFragment"
-        android:label="SearchFragment" />
 
 </navigation>

@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teknasyon.satellitetracker.data.model.Satellite
 import com.teknasyon.satellitetracker.databinding.AdapterItemSatellitesBinding
+import com.teknasyon.satellitetracker.util.filter.FilterableAdapter
 
 class SatellitesAdapter(
-    private val satellites: List<Satellite>,
-    private val callback: (Satellite) -> Unit
-) : RecyclerView.Adapter<SatellitesAdapter.SatellitesAdapterViewHolder>() {
+    private val callback: (Satellite) -> Unit,
+    allItems: List<Satellite>,
+) : FilterableAdapter<Satellite, SatellitesAdapter.SatellitesAdapterViewHolder>(allItems = allItems) {
 
     inner class SatellitesAdapterViewHolder(val binding: AdapterItemSatellitesBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -20,10 +21,8 @@ class SatellitesAdapter(
         return SatellitesAdapterViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = satellites.size
-
     override fun onBindViewHolder(holder: SatellitesAdapterViewHolder, position: Int) {
-        val satellite = satellites[position]
+        val satellite = getItems(position)
         holder.binding.satellite = satellite
         holder.binding.root.setOnClickListener {
             callback(satellite)

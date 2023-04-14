@@ -27,3 +27,8 @@ fun Int.showWithSeparatorDots(): String {
     val formatter = DecimalFormat("#,###", symbols)
     return formatter.format(this)
 }
+
+fun <T> MutableList<T>.changeAll(other: Collection<T>){
+    clear()
+    addAll(other)
+}

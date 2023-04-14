@@ -3,6 +3,7 @@ package com.teknasyon.satellitetracker.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,6 +24,8 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private val viewModel by viewModels<MainViewModel>()
 
+    private lateinit var adapter: SatellitesAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUI()
@@ -38,7 +41,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 }
                 is DataState.Success -> {
                     binding.loadingProgressBar.isGone = true
-                    val adapter = SatellitesAdapter(it.data, ::navigateToDetails)
+                    adapter = SatellitesAdapter(
+                        allItems = it.data,
+                        callback = ::navigateToDetails
+                    )
                     binding.recyclerView.adapter = adapter
                 }
                 is DataState.Error -> {
@@ -48,6 +54,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 }
             }
         }
+
+        viewModel.searchQuery.observe(viewLifecycleOwner) {
+            adapter.filter.filter(it)
+        }
+
     }
 
     private fun setUI() {
@@ -61,10 +72,26 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             addItemDecoration(itemDecoration)
             setHasFixedSize(true)
         }
+
+        binding.searchView.setOnQueryTextListener(
+            object : OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    viewModel.writeToSearchQuery(query)
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+//                    adapter.filter.filter(newText)
+                    viewModel.writeToSearchQuery(newText)
+                    return false
+                }
+            }
+        )
     }
 
     private fun navigateToDetails(satellite: Satellite) {
         val action = MainFragmentDirections.navigateToDetailsFragment(satellite = satellite)
         findNavController().navigate(action)
     }
+
 }
